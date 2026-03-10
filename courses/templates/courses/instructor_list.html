@@ -1,0 +1,65 @@
+{% extends 'courses/base.html' %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+  <!-- Page Heading -->
+  <div class="text-center mb-4">
+    <h2 class="fw-bold">👩‍🏫 Instructors</h2>
+    <p class="text-muted">View and manage all instructors in the system.</p>
+  </div>
+
+  <!-- Add Button (only for logged-in users) -->
+  {% if user.is_authenticated %}
+  <div class="d-flex justify-content-end mb-3">
+    <a href="{% url 'instructor-add' %}" class="btn btn-primary px-4 shadow-sm">➕ Add Instructor</a>
+  </div>
+  {% endif %}
+
+  <!-- Instructors Table -->
+  <div class="card shadow-sm border-0">
+    <div class="card-body p-4">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle text-center mb-0">
+          <thead class="table-dark">
+            <tr>
+              <th style="width: 10%;">ID</th>
+              <th style="width: 45%;">Name</th>
+              <th style="width: 35%;">Email</th>
+              {% if user.is_authenticated %}
+                <th style="width: 10%;">Actions</th>
+              {% endif %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for instructor in instructors %}
+            <tr>
+              <td>{{ instructor.id }}</td>
+              <td class="fw-semibold">{{ instructor.name }}</td>
+              <td>{{ instructor.email }}</td>
+              {% if user.is_authenticated %}
+              <td>
+                <a href="{% url 'instructor-edit' instructor.id %}" class="btn btn-sm btn-warning fw-semibold px-3">
+                  ✏️ Edit
+                </a>
+              </td>
+              {% endif %}
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="4" class="text-muted py-4">No instructors available.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Message for guests -->
+  {% if not user.is_authenticated %}
+  <p class="text-center text-muted mt-4">
+    🔒 <strong>Note:</strong> Please <a href="{% url 'login' %}" class="text-decoration-none">login</a> to add or edit instructors.  
+  </p>
+  {% endif %}
+</div>
+{% endblock %}

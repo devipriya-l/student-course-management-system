@@ -1,0 +1,76 @@
+{% extends 'courses/base.html' %}
+{% block content %}
+
+<div class="text-center">
+    <h2 class="fw-bold mb-4">📊 Learning Management System Dashboard</h2>
+    <p class="text-muted mb-5">Here’s a quick summary of your platform’s activity.</p>
+
+    <div class="row g-4 justify-content-center">
+        <div class="col-md-3">
+    <a href="{% url 'course-list' %}" 
+       style="text-decoration: none; color: inherit; display: block;">
+        <div class="card p-4 bg-primary text-white" 
+             style="cursor:pointer; 
+                    transition: transform 0.2s, box-shadow 0.2s;
+                    box-shadow: 0 4px 10px rgba(0,0,0,0.3); overflow: visible;" 
+             onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.4)';" 
+             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 10px rgba(0,0,0,0.3)';">
+            <div class="stat-icon">📚</div>
+            <h4>Courses</h4>
+            <h2>{{ stats.course_count }}</h2>
+        </div>
+    </a>
+</div>
+
+
+        <div class="col-md-3">
+            <a href="{% url 'student-list' %}" 
+            style="text-decoration: none; color: inherit; display: block;">
+            <div class="card p-4 bg-success text-white"
+            style="cursor:pointer; 
+                    transition: transform 0.2s, box-shadow 0.2s;
+                    box-shadow: 0 4px 10px rgba(0,0,0,0.3); overflow: visible;" 
+             onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.4)';" 
+             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 10px rgba(0,0,0,0.3)';">
+                <div class="stat-icon">🎓</div>
+                <h4>Students</h4>
+                <h2>{{ stats.student_count }}</h2>
+            </div>
+            </a>
+        </div>
+
+        <div class="col-md-3">
+            <a href="{% url 'instructor-list' %}" 
+            style="text-decoration: none; color: inherit; display: block;">
+            <div class="card p-4 bg-warning text-dark"
+            style="cursor:pointer; 
+                    transition: transform 0.2s, box-shadow 0.2s;
+                    box-shadow: 0 4px 10px rgba(0,0,0,0.3); overflow: visible;" 
+             onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.4)';" 
+             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 10px rgba(0,0,0,0.3)';">
+                <div class="stat-icon">👩‍🏫</div>
+                <h4>Instructors</h4>
+                <h2>{{ stats.instructor_count }}</h2>
+            </div>
+            </a>
+        </div>
+
+        <div class="col-md-3">
+            <a href="{% url 'enrollment-list' %}" 
+            style="text-decoration: none; color: inherit; display: block;">
+            <div class="card p-4 bg-info text-dark"
+            style="cursor:pointer; 
+                    transition: transform 0.2s, box-shadow 0.2s;
+                    box-shadow: 0 4px 10px rgba(0,0,0,0.3); overflow: visible;" 
+             onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.4)';" 
+             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 10px rgba(0,0,0,0.3)';">
+                <div class="stat-icon">🧾</div>
+                <h4>Enrollments</h4>
+                <h2>{{ stats.enrollment_count }}</h2>
+            </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

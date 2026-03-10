@@ -1,0 +1,46 @@
+{% extends 'courses/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container d-flex justify-content-center mt-5 mb-5">
+  <div class="card shadow-sm border-0 p-4" style="max-width: 600px; width: 100%;">
+    <h3 class="fw-bold text-center mb-4">
+      {% if form.instance.pk %}✏️ Edit Enrollment{% else %}➕ Add Enrollment{% endif %}
+    </h3>
+
+    <form method="post" novalidate>
+      {% csrf_token %}
+
+      <!-- Student -->
+      <div class="mb-3">
+        <label for="id_student" class="form-label fw-semibold">Student</label>
+        {{ form.student|add_class:"form-select" }}
+      </div>
+
+      <!-- Course -->
+      <div class="mb-3">
+        <label for="id_course" class="form-label fw-semibold">Course</label>
+        {{ form.course|add_class:"form-select" }}
+      </div>
+
+      <!-- Enrollment Date (optional if your form has it) -->
+      {% if form.enrollment_date %}
+      <div class="mb-3">
+        <label for="id_enrollment_date" class="form-label fw-semibold">Enrollment Date</label>
+        {{ form.enrollment_date|add_class:"form-control" }}
+      </div>
+      {% endif %}
+
+      <!-- Buttons -->
+      <div class="d-flex justify-content-between mt-4">
+        <a href="{% url 'enrollment-list' %}" class="btn btn-secondary px-4">
+          ← Back to List
+        </a>
+        <button type="submit" class="btn btn-primary px-4">
+          {% if form.instance.pk %}💾 Update{% else %}💾 Save{% endif %}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

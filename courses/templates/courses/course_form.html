@@ -1,0 +1,44 @@
+{% extends 'courses/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container d-flex justify-content-center mt-5 mb-5">
+  <div class="card shadow-sm border-0 p-4" style="max-width: 600px; width: 100%;">
+    <h3 class="fw-bold text-center mb-4">
+      {% if form.instance.pk %}✏️ Edit Course{% else %}➕ Add Course{% endif %}
+    </h3>
+
+    <form method="post" novalidate>
+      {% csrf_token %}
+
+      <!-- Course Title -->
+      <div class="mb-3">
+        <label for="id_title" class="form-label fw-semibold">Course Title</label>
+        {{ form.title|add_class:"form-control" }}
+      </div>
+
+      <!-- Course Description -->
+      <div class="mb-3">
+        <label for="id_description" class="form-label fw-semibold">Description</label>
+        {{ form.description|add_class:"form-control" }}
+      </div>
+
+      <!-- Instructor -->
+      <div class="mb-4">
+        <label for="id_instructor" class="form-label fw-semibold">Instructor</label>
+        {{ form.instructor|add_class:"form-select" }}
+      </div>
+
+      <!-- Buttons -->
+      <div class="d-flex justify-content-between">
+        <a href="{% url 'course-list' %}" class="btn btn-secondary px-4">
+          ← Back to List
+        </a>
+        <button type="submit" class="btn btn-primary px-4">
+          {% if form.instance.pk %}💾 Update{% else %}💾 Save{% endif %}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
